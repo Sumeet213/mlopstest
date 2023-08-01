@@ -1,0 +1,27 @@
+# Configuration for Intent Classification Project
+
+# Data
+data:
+  source_url: "/kaggle/input/part1-file/blogtext.csv" # Update this with the path to your CSV file
+  intents: [
+      "informative_dict",
+      "opinion_dict",
+      "promotional_dict",
+      "entertaining_dict",
+      "educational_dict",
+      "inspirational_dict",
+    ] # Update this with your intents
+  threshold: 3 # Update this with your threshold
+
+# Model
+model:
+  base_model: "bert-base-uncased" # Update this with the name of your base model
+  max_length: 512 # Update this with the maximum length for the BERT tokenizer
+  batch_size: 16 # Update this with your batch size
+  epochs: 3 # Update this with the number of epochs for training
+
+# Paths
+paths:
+  base_model_path: "path/to/base/model" # Update this with the path to your base model
+  trained_model_path: "path/to/trained/model" # Update this with the path to your trained model
+  new_dataset_path: "new_dataset1.csv" # Update this with the path to your new dataset
