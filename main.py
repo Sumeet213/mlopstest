@@ -11,7 +11,7 @@ if __name__ == "__main__":
         STAGE_NAME = "Data Ingestion stage"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         data_ingestion = DataIngestionTrainingPipeline()
-        train_inputs, val_inputs, train_labels, val_labels = data_ingestion.main()
+        train_dataset, val_dataset = data_ingestion.main()
         logger.info(
             f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         logger.info(f">>>>>> base started <<<<<<")
 
         prepare_base_model = PrepareBaseModelTrainingPipeline(
-            base_model_config, train_inputs, val_inputs, train_labels, val_labels)
+            base_model_config,  train_dataset, val_dataset)
         model = prepare_base_model.main()
         logger.info(
             f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         STAGE_NAME = "Training"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         model_trainer = ModelTrainingPipeline(
-            model, train_inputs, val_inputs, train_labels, val_labels)
+            model,  train_dataset, val_dataset)
         model_trainer.main()
         logger.info(
             f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")

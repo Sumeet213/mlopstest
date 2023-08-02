@@ -1,6 +1,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from transformers import BertTokenizerFast
+import tensorflow as tf
 
 
 class DataIngestor:
@@ -8,7 +9,6 @@ class DataIngestor:
         self.source_file = config.source_file
         self.intents_dict = config.intents_dict
         self.threshold = config.threshold
-
 
     def load_and_process_data(self):
         # Load your dataset
@@ -49,4 +49,10 @@ class DataIngestor:
         train_inputs, val_inputs, train_labels, val_labels = train_test_split(
             input_encodings['input_ids'], labels, test_size=0.2)
 
-        return train_inputs, val_inputs, train_labels, val_labels
+        # Convert the data to TensorFlow Datasets
+        train_dataset = tf.data.Dataset.from_tensor_slices(
+            (train_inputs, train_labels)).shuffle(10000).batch(16)
+        val_dataset = tf.data.Dataset.from_tensor_slices(
+            (val_inputs, val_labels)).batch(16)
+
+        return train_dataset, val_dataset

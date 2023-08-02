@@ -12,6 +12,7 @@ class Trainer:
 
     def train(self, epochs):
         print(f"MAYBE HERE???????????//")
+
         # Compile the model with a optimizer, loss, and metrics
         self.model.compile(optimizer=Adam(learning_rate=3e-5, epsilon=1e-08, clipnorm=1.0),
                            # Using binary_crossentropy for multi-label classification
@@ -19,7 +20,11 @@ class Trainer:
                            metrics=['accuracy'])
 
         # Train the model
-        history = self.model.fit(
-            self.train_dataset, epochs=epochs, validation_data=self.val_dataset, verbose=2)
-
+        try:
+            history = self.model.fit(
+                self.train_dataset,  validation_data=self.val_dataset, epochs=epochs, verbose=0)
+        except Exception as e:
+            print(f"ERROR: {e}")
+        # history = self.model.fit(
+        #     self.train_dataset, epochs=epochs, validation_data=self.val_dataset, verbose=0)
         return "test"

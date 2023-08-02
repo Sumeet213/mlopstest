@@ -6,12 +6,10 @@ STAGE_NAME = "Prepare Base Model stage"
 
 
 class PrepareBaseModelTrainingPipeline:
-    def __init__(self, base_model_config, train_inputs, val_inputs, train_labels, val_labels):
+    def __init__(self, base_model_config, train_dataset, val_dataset):
         self.base_model_config = base_model_config
-        self.train_inputs = train_inputs
-        self.val_inputs = val_inputs
-        self.train_labels = train_labels
-        self.val_labels = val_labels
+        self.train_dataset = train_dataset
+        self.val_dataset = val_dataset
 
     def main(self):
         print(f"something3")

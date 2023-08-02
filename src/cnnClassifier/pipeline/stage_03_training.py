@@ -7,12 +7,10 @@ STAGE_NAME = "Training"
 
 
 class ModelTrainingPipeline:
-    def __init__(self, model, train_inputs, val_inputs, train_labels, val_labels):
+    def __init__(self, model, train_dataset, val_dataset):
         self.model = model
-        self.train_inputs = train_inputs
-        self.val_inputs = val_inputs
-        self.train_labels = train_labels
-        self.val_labels = val_labels
+        self.train_dataset = train_dataset
+        self.val_dataset = val_dataset
 
     def main(self):
         config = ConfigurationManager()
@@ -23,7 +21,7 @@ class ModelTrainingPipeline:
 
         training_config = config.get_training_config().to_dict()
         print(f"training_config")
-        trainer = Trainer(self.model, self.train_inputs, self.val_inputs)
+        trainer = Trainer(self.model, self.train_dataset, self.val_dataset)
 
         training = trainer.train(training_config['epochs'])
 
