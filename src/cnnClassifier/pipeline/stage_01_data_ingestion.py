@@ -12,7 +12,6 @@ class DataIngestionTrainingPipeline:
     def main(self):
         config = ConfigurationManager()
         data_ingestion_config = config.get_data_ingestion_config()
-        print(data_ingestion_config)
         data_ingestion = DataIngestor(data_ingestion_config)
         return data_ingestion.load_and_process_data()
 

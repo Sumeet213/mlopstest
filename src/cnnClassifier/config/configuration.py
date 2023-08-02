@@ -39,6 +39,7 @@ class TrainingConfig:
 
     def to_dict(self):
         return {
+            'epochs': self.epochs,
             'base_model_name': self.base_model_name,
             'intents': self.intents
         }
@@ -104,4 +105,4 @@ class ConfigurationManager:
         epochs = 10
         base_model_name = 'bert-base-uncased'
         intents = ['intent1', 'intent2', 'intent3']
-        return TrainingConfig(base_model_name, intents, epochs)
+        return TrainingConfig(epochs, base_model_name, intents)

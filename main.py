@@ -12,30 +12,40 @@ if __name__ == "__main__":
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         data_ingestion = DataIngestionTrainingPipeline()
         train_inputs, val_inputs, train_labels, val_labels = data_ingestion.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+        logger.info(
+            f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
         # Prepare base model stage
         STAGE_NAME = "Prepare base model"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         config = ConfigurationManager()
+        logger.info(f">>>>>> config started <<<<<<")
+
         base_model_config = config.get_base_model_preparation_config()
-        prepare_base_model = PrepareBaseModelTrainingPipeline(base_model_config, train_inputs, val_inputs, train_labels, val_labels)
+        logger.info(f">>>>>> base started <<<<<<")
+
+        prepare_base_model = PrepareBaseModelTrainingPipeline(
+            base_model_config, train_inputs, val_inputs, train_labels, val_labels)
         model = prepare_base_model.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+        logger.info(
+            f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
         # Training stage
         STAGE_NAME = "Training"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
-        model_trainer = ModelTrainingPipeline(model, train_inputs, val_inputs, train_labels, val_labels)
+        model_trainer = ModelTrainingPipeline(
+            model, train_inputs, val_inputs, train_labels, val_labels)
         model_trainer.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+        logger.info(
+            f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 
         # Evaluation stage
-        STAGE_NAME = "Evaluation stage"
+        """  STAGE_NAME = "Evaluation stage"
         logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<")
         model_evalution = EvaluationPipeline(model, val_inputs, val_labels)
         model_evalution.main()
-        logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+        logger.info(
+            f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x") """
 
     except Exception as e:
         logger.exception(e)

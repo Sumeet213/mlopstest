@@ -12,14 +12,18 @@ class PrepareBaseModelTrainingPipeline:
         self.val_inputs = val_inputs
         self.train_labels = train_labels
         self.val_labels = val_labels
-       
-
 
     def main(self):
+        print(f"something3")
         config = ConfigurationManager()
         prepare_base_model_config = config.get_base_model_preparation_config().to_dict()
+        print(f"something1")
+
         base_model_preparer = BaseModelPreparer(**prepare_base_model_config)
+        print(f"something")
         model = base_model_preparer.prepare_base_model()
+        print(f"numbers")
+
         return model
 
 

@@ -1,7 +1,8 @@
 from transformers import TFBertModel
 import tensorflow as tf
-from tensorflow.keras.layers import Dense
-from tensorflow.keras import Model
+from tensorflow import keras
+from keras.layers import Dense
+from keras import Model
 
 
 class BaseModelPreparer:
@@ -23,6 +24,3 @@ class BaseModelPreparer:
         model = Model(inputs=input_ids, outputs=out)
 
         return model
-    
-
-   

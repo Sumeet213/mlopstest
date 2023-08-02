@@ -1,4 +1,7 @@
-from tensorflow.keras.optimizers import Adam
+import tensorflow as tf
+from tensorflow import keras
+from keras import optimizers
+from keras.optimizers import Adam
 
 
 class Trainer:
@@ -8,6 +11,7 @@ class Trainer:
         self.val_dataset = val_dataset
 
     def train(self, epochs):
+        print(f"MAYBE HERE???????????//")
         # Compile the model with a optimizer, loss, and metrics
         self.model.compile(optimizer=Adam(learning_rate=3e-5, epsilon=1e-08, clipnorm=1.0),
                            # Using binary_crossentropy for multi-label classification
@@ -16,5 +20,6 @@ class Trainer:
 
         # Train the model
         history = self.model.fit(
-            self.train_dataset, epochs=epochs, validation_data=self.val_dataset)
-        return history
+            self.train_dataset, epochs=epochs, validation_data=self.val_dataset, verbose=2)
+
+        return "test"

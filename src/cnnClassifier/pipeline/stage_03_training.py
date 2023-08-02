@@ -17,12 +17,15 @@ class ModelTrainingPipeline:
     def main(self):
         config = ConfigurationManager()
         prepare_callbacks_config = config.get_callbacks_preparation_config().to_dict()
-        prepare_callbacks = CallbacksPreparer(**prepare_callbacks_config)
-        callback_list = prepare_callbacks.prepare_callbacks()
+
+        """ prepare_callbacks = CallbacksPreparer(**prepare_callbacks_config)
+        callback_list = prepare_callbacks.prepare_callbacks() """
 
         training_config = config.get_training_config().to_dict()
-        training = Trainer(**training_config)
-        training.train_model(callback_list=callback_list)
+        print(f"training_config")
+        trainer = Trainer(self.model, self.train_inputs, self.val_inputs)
+
+        training = trainer.train(training_config['epochs'])
 
 
 if __name__ == '__main__':
