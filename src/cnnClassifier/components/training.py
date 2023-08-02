@@ -22,7 +22,7 @@ class Trainer:
         # Train the model
         try:
             history = self.model.fit(
-                self.train_dataset,  validation_data=self.val_dataset, epochs=epochs, verbose=0)
+                self.train_dataset,  validation_data=self.val_dataset, epochs=epochs, verbose=1)
         except Exception as e:
             print(f"ERROR: {e}")
         # history = self.model.fit(
